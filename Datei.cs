@@ -6,15 +6,24 @@ using System.Threading.Tasks;
 
 namespace Kontakliste
 {
-    internal class Datei
+    public class Datei
     {
-        private string datei = @"";
+        private string datei;
         private FileStream stream;
 
-        public void schreibeCSV( List<Kontakt> liKon)
+        public Datei(string d)
         {
-            stream = 
-                new FileStream(datei, FileMode.Create, FileAccess.Write);
+            datei = d;
+        }
+
+        public Datei()
+        {
+            datei = @"C:\Users\tn\source\kontaktliste.txt";
+        }
+
+        public void schreibeCSV(List<Kontakt> liKon)
+        {
+            stream = new FileStream(datei, FileMode.Create, FileAccess.Write);
             StreamWriter sr = new StreamWriter(stream);
 
             foreach (Kontakt k in liKon)

@@ -43,6 +43,16 @@ namespace Kontakliste
             return "(" + Vorname + ", " + Name + ")";
         }
 
+        public string toCSV()
+        {
+            string csv = "";
+            foreach(string s in getAll())
+            {
+                csv += s + ";";
+            }
+            return csv;
+        }
+
         public string[] getAll()
         {
             int nrOfAttributes = this.GetType().GetProperties().Length;

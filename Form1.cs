@@ -82,34 +82,10 @@ namespace Kontakliste {
             k = new Kontakt(txtName.Text, txtVname.Text, txtEmail.Text, txtPhone.Text, txtStrasse.Text, h, txtPlz.Text, txtStadt.Text);
         }
 
-        private bool writeKontakte()
-        {
-            try
-            {
-                //Pass the filepath and filename to the StreamWriter Constructor
-                StreamWriter sw = new StreamWriter("C:\\Users\\ro.baumgarten\\source\\repos\\Kontakliste\\bin\\Debug\\net8.0-windows\\kontaktliste.txt");
-                foreach(Kontakt ko in kontakte)
-                {
-                    sw.WriteLine(ko.ToString());
-                }
-                sw.Close();
-                lblWarning.Text = "Erfolgreich in Datei geschrieben!";
-            }
-            catch (Exception e)
-            {
-                lblWarning.Text = "Exception: " + e.Message;
-            }
-            finally
-            {
-                //lblWarning.Text = "Executing finally block.";
-            }
-
-            return true;
-        }
-
         private void btnWrite_Click(object sender, EventArgs e)
         {
-            writeKontakte();
+            Datei d = new Datei();
+            d.schreibeCSV(kontakte);
         }
     }
 } 

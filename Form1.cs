@@ -1,20 +1,19 @@
+using System.Runtime.CompilerServices;
+using System.IO;
+
 namespace Kontakliste {
     public partial class Form1 : Form
     {
         Kontakt k;
         List<Kontakt> kontakte = new List<Kontakt>();
-        List<TextBox> tb = new List<TextBox>();
+        List<TextBox> textBoxes = new List<TextBox>();
         public Form1()
         {
             InitializeComponent();
-            tb.Add(txtName);
-            tb.Add(txtVname);
-            tb.Add(txtEmail);
-            tb.Add(txtPhone);
-            tb.Add(txtStrasse);
-            tb.Add(txtHausnr);
-            tb.Add(txtPlz);
-            tb.Add(txtStadt);
+            foreach (var tb in this.Controls.OfType<TextBox>())
+            {
+                textBoxes.Add(tb);
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -24,6 +23,28 @@ namespace Kontakliste {
             lstKontakte.Items.Add(k.kontaktinfo());
             clearText();
         }
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+
+            int index = lstKontakte.SelectedIndices[0];
+            readKontakt();
+            kontakte[index] = k;
+            //lstKontakte.Items[index] = k.kontaktinfo();
+            updateList();
+            clearText();
+        }
+
+        private void lstKontakte_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int ausgewaehlterIndex = lstKontakte.SelectedIndices[0];
+            k = kontakte[ausgewaehlterIndex];
+
+            string[] attributes = k.getAll();
+            for (int i = 0; i < attributes.Length; i++)
+            {
+                textBoxes[i].Text = attributes[i];
+            }
+        }
 
         void clearText()
         {
@@ -32,23 +53,14 @@ namespace Kontakliste {
                 tb.Clear();
             }
             lblWarning.Text = "";
-
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void updateList()
         {
-            int index = lstKontakte.SelectedIndices[0];
-            readKontakt();
-            kontakte[index] = k;
-            lstKontakte.Items[index] = k.kontaktinfo();
-        }
-
-        private void lstKontakte_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string[] attributes = k.getAll();
-            for(int i = 0; i< attributes.Length; i++)
+            lstKontakte.Items.Clear();
+            foreach (Kontakt ko in kontakte)
             {
-                tb[i].Text = attributes[i];
+                lstKontakte.Items.Add(ko.kontaktinfo());
             }
         }
 
@@ -61,10 +73,43 @@ namespace Kontakliste {
             }
             else
             {
+                /*
                 lblWarning.Text = "Fehler bei der Hausnummer!";
                 return;
+                */
+                h = 0;
             };
             k = new Kontakt(txtName.Text, txtVname.Text, txtEmail.Text, txtPhone.Text, txtStrasse.Text, h, txtPlz.Text, txtStadt.Text);
         }
+
+        private bool writeKontakte()
+        {
+            try
+            {
+                //Pass the filepath and filename to the StreamWriter Constructor
+                StreamWriter sw = new StreamWriter("C:\\Users\\ro.baumgarten\\source\\repos\\Kontakliste\\bin\\Debug\\net8.0-windows\\kontaktliste.txt");
+                foreach(Kontakt ko in kontakte)
+                {
+                    sw.WriteLine(ko.ToString());
+                }
+                sw.Close();
+                lblWarning.Text = "Erfolgreich in Datei geschrieben!";
+            }
+            catch (Exception e)
+            {
+                lblWarning.Text = "Exception: " + e.Message;
+            }
+            finally
+            {
+                //lblWarning.Text = "Executing finally block.";
+            }
+
+            return true;
+        }
+
+        private void btnWrite_Click(object sender, EventArgs e)
+        {
+            writeKontakte();
+        }
     }
-}
+} 

@@ -48,15 +48,17 @@
             txtVname = new TextBox();
             btnUpdate = new Button();
             lblWarning = new Label();
+            lblKontaktliste = new Label();
+            btnWrite = new Button();
             SuspendLayout();
             // 
             // lstKontakte
             // 
             lstKontakte.FormattingEnabled = true;
             lstKontakte.ItemHeight = 15;
-            lstKontakte.Location = new Point(553, 74);
+            lstKontakte.Location = new Point(529, 93);
             lstKontakte.Name = "lstKontakte";
-            lstKontakte.Size = new Size(199, 319);
+            lstKontakte.Size = new Size(199, 409);
             lstKontakte.TabIndex = 0;
             lstKontakte.SelectedIndexChanged += lstKontakte_SelectedIndexChanged;
             // 
@@ -107,9 +109,9 @@
             lblHausnummer.Font = new Font("Segoe UI", 12F);
             lblHausnummer.Location = new Point(128, 286);
             lblHausnummer.Name = "lblHausnummer";
-            lblHausnummer.Size = new Size(105, 21);
+            lblHausnummer.Size = new Size(108, 21);
             lblHausnummer.TabIndex = 5;
-            lblHausnummer.Text = "Hausnummer";
+            lblHausnummer.Text = "Hausnummer:";
             // 
             // lblStreet
             // 
@@ -153,58 +155,58 @@
             // 
             // txtName
             // 
-            txtName.Location = new Point(228, 53);
+            txtName.Location = new Point(236, 53);
             txtName.Name = "txtName";
-            txtName.Size = new Size(202, 23);
+            txtName.Size = new Size(116, 23);
             txtName.TabIndex = 10;
             // 
             // txtStadt
             // 
-            txtStadt.Location = new Point(228, 388);
+            txtStadt.Location = new Point(236, 388);
             txtStadt.Name = "txtStadt";
-            txtStadt.Size = new Size(100, 23);
+            txtStadt.Size = new Size(116, 23);
             txtStadt.TabIndex = 17;
             // 
             // txtPlz
             // 
-            txtPlz.Location = new Point(228, 333);
+            txtPlz.Location = new Point(236, 333);
             txtPlz.Name = "txtPlz";
-            txtPlz.Size = new Size(100, 23);
+            txtPlz.Size = new Size(116, 23);
             txtPlz.TabIndex = 16;
             // 
             // txtHausnr
             // 
-            txtHausnr.Location = new Point(228, 288);
+            txtHausnr.Location = new Point(300, 288);
             txtHausnr.Name = "txtHausnr";
-            txtHausnr.Size = new Size(100, 23);
+            txtHausnr.Size = new Size(52, 23);
             txtHausnr.TabIndex = 15;
             // 
             // txtStrasse
             // 
-            txtStrasse.Location = new Point(228, 231);
+            txtStrasse.Location = new Point(236, 231);
             txtStrasse.Name = "txtStrasse";
-            txtStrasse.Size = new Size(100, 23);
+            txtStrasse.Size = new Size(116, 23);
             txtStrasse.TabIndex = 14;
             // 
             // txtPhone
             // 
-            txtPhone.Location = new Point(228, 191);
+            txtPhone.Location = new Point(236, 191);
             txtPhone.Name = "txtPhone";
-            txtPhone.Size = new Size(100, 23);
+            txtPhone.Size = new Size(116, 23);
             txtPhone.TabIndex = 13;
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(228, 147);
+            txtEmail.Location = new Point(236, 147);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(100, 23);
+            txtEmail.Size = new Size(116, 23);
             txtEmail.TabIndex = 12;
             // 
             // txtVname
             // 
-            txtVname.Location = new Point(228, 102);
+            txtVname.Location = new Point(236, 102);
             txtVname.Name = "txtVname";
-            txtVname.Size = new Size(100, 23);
+            txtVname.Size = new Size(116, 23);
             txtVname.TabIndex = 11;
             // 
             // btnUpdate
@@ -223,18 +225,42 @@
             lblWarning.AutoSize = true;
             lblWarning.Font = new Font("Segoe UI", 14F);
             lblWarning.ForeColor = Color.Crimson;
-            lblWarning.Location = new Point(311, 13);
+            lblWarning.Location = new Point(319, 13);
             lblWarning.Name = "lblWarning";
             lblWarning.Size = new Size(0, 25);
             lblWarning.TabIndex = 20;
+            // 
+            // lblKontaktliste
+            // 
+            lblKontaktliste.AutoSize = true;
+            lblKontaktliste.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblKontaktliste.Location = new Point(571, 53);
+            lblKontaktliste.Name = "lblKontaktliste";
+            lblKontaktliste.Size = new Size(118, 25);
+            lblKontaktliste.TabIndex = 21;
+            lblKontaktliste.Text = "Kontaktliste";
+            // 
+            // btnWrite
+            // 
+            btnWrite.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnWrite.Location = new Point(222, 527);
+            btnWrite.Name = "btnWrite";
+            btnWrite.Size = new Size(130, 37);
+            btnWrite.TabIndex = 22;
+            btnWrite.Text = "Speichern!";
+            btnWrite.UseVisualStyleBackColor = true;
+            btnWrite.Click += btnWrite_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(832, 576);
+            Controls.Add(btnWrite);
+            Controls.Add(lblKontaktliste);
             Controls.Add(lblWarning);
             Controls.Add(btnUpdate);
+            Controls.Add(txtName);
             Controls.Add(txtVname);
             Controls.Add(txtEmail);
             Controls.Add(txtPhone);
@@ -242,7 +268,6 @@
             Controls.Add(txtHausnr);
             Controls.Add(txtPlz);
             Controls.Add(txtStadt);
-            Controls.Add(txtName);
             Controls.Add(lblVname);
             Controls.Add(lblEmail);
             Controls.Add(lblPhone);
@@ -281,5 +306,7 @@
         private TextBox txtVname;
         private Button btnUpdate;
         private Label lblWarning;
+        private Label lblKontaktliste;
+        private Button btnWrite;
     }
 }
